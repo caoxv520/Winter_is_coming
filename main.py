@@ -1,5 +1,6 @@
 # 引入需要的包
 import pygame
+from main_button import Main_button
 
 class Main:
     # 初始化pygame
@@ -16,9 +17,14 @@ class Main:
         pygame.display.set_caption("凌冬已至游戏窗口")
         # 设置背景图片
         self.set_bg_img("public/img/bg.png")
-        
-        
+        # 设置背景音乐
+        self.set_main_bgm("public/music/main_bgm.mp3")
+        # 创建按钮列表
+        self.button = Main_button(self)
 
+
+
+    # 主循环
     def run(self):
         while True:
             # 处理事件
@@ -53,9 +59,13 @@ class Main:
         # 绘制背景图片
         self.screen.blit(self.bg_img, (0, 0))
 
+    def set_main_bgm(self, bgm_path):
+        # 设置背景音乐
+        pygame.mixer.music.load(bgm_path)
+        # 播放背景音乐
+        pygame.mixer.music.play(-1)
 
-
-#  主函数
+# 主函数
 main = Main()
 # 启动主循环
 main.run()
