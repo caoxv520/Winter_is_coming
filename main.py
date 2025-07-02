@@ -20,21 +20,36 @@ class Main:
         # 设置背景音乐
         self.set_main_bgm("public/music/main_bgm.mp3")
         # 创建按钮列表
-        self.button = Main_button(self)
+        self.button_color_list = [{
+            "color": (255, 255, 255),
+            "background_color": (0, 0, 0),
+        }, {
+            "color": (255, 255, 255),
+            "background_color": (0, 0, 0),
+        },{
+            "color": (255, 255, 255),
+            "background_color": (0, 0, 0),
+        }]
+     
 
 
 
     # 主循环
     def run(self):
         while True:
+            # 创建按钮
+            self.button = Main_button(self)  
             # 处理事件
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()
-
-            # 更新屏幕
+                elif event.type == pygame.MOUSEMOTION:
+                    self.button.set_button_color()
+            
+            
             pygame.display.update()
+         
 
     def get_screen_size(self):
         # 获取屏幕尺寸
