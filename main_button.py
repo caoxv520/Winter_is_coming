@@ -1,5 +1,6 @@
 import pygame
 
+
 class Main_button:
     # 初始化函数，创建一个按钮列表
     def __init__(self, main):
@@ -44,6 +45,10 @@ class Main_button:
                             "color": (255, 255, 255),
                             "background_color": (200, 200, 200)
                         }
+    
 
 
-   
+      
+            
+
+             

@@ -1,5 +1,7 @@
 # 引入需要的包
 import pygame
+import sys
+from start_game import Start_game
 from main_button import Main_button
 
 class Main:
@@ -32,22 +34,27 @@ class Main:
         }]
      
 
-
-
     # 主循环
     def run(self):
+        # 无限循环，直到退出游戏
         while True:
-            # 创建按钮
-            self.button = Main_button(self)  
+            # 创建主按钮
+            self.button = Main_button(self)
             # 处理事件
             for event in pygame.event.get():
+                # 如果点击关闭按钮，退出游戏
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    exit()
-                elif event.type == pygame.MOUSEMOTION:
-                    self.button.set_button_color()
+                    sys.exit()   
+                # 如果鼠标按下，判断是否点击了按钮
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    # 如果点击了第一个按钮，开始游戏
+                    if self.button.button_list[0]["rect"].collidepoint(event.pos):
+                        Start_game(self)
             
-            
+            # 设置按钮颜色
+            self.button.set_button_color()
+            # 更新显示
             pygame.display.update()
          
 
@@ -80,7 +87,70 @@ class Main:
         # 播放背景音乐
         pygame.mixer.music.play(-1)
 
-# 主函数
 main = Main()
-# 启动主循环
 main.run()
+
+import pygame
+
+class Start_game:
+
+    def __init__(self, main):
+        # 初始化函数，用于创建类的实例
+        self.main = main  # 将传入的main参数赋值给实例变量self.main
+        # 设置背景图片
+        self.set_start_game_bg_img('public/img/game1.png')
+     
+
+    def game_run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return  # 退出游戏循环
+                    
+            # 绘制背景图片
+            self.main.screen.blit(self.bg_img, (0, 0))
+            
+            # 刷新屏幕
+            pygame.display.update()
+
+    def set_start_game_bg_img(self, img_path):
+        # 设置背景图片
+        self.bg_img = pygame.image.load(img_path)
+        # 缩放背景图片到窗口大小
+        self.window_size = self.main.screen.get_size()  # 获取窗口大小
+        self.bg_img = pygame.transform.scale(self.bg_img, self.window_size)
+        # 绘制背景图片
+        self.main.screen.blit(self.bg_img, (0, 0))
+import pygame
+
+class Start_game:
+
+    def __init__(self, main):
+        # 初始化函数，用于创建类的实例
+        self.main = main  # 将传入的main参数赋值给实例变量self.main
+        # 设置背景图片
+        self.set_start_game_bg_img('public/img/game1.png')
+     
+
+    def game_run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return  # 退出游戏循环
+                    
+            # 绘制背景图片
+            self.main.screen.blit(self.bg_img, (0, 0))
+            
+            # 刷新屏幕
+            pygame.display.update()
+
+    def set_start_game_bg_img(self, img_path):
+        # 设置背景图片
+        self.bg_img = pygame.image.load(img_path)
+        # 缩放背景图片到窗口大小
+        self.window_size = self.main.screen.get_size()  # 获取窗口大小
+        self.bg_img = pygame.transform.scale(self.bg_img, self.window_size)
+        # 绘制背景图片
+        self.main.screen.blit(self.bg_img, (0, 0))
