@@ -1,4 +1,5 @@
 import pygame
+import sys
 
 
 class Start_game:
@@ -10,12 +11,12 @@ class Start_game:
         self.set_start_game_bg_img('public/img/game1.png')
      
 
-    def game_run():
+    def game_run(self):
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    
+                    sys.exit()
                 #刷新
                 pygame.display.update()
 
